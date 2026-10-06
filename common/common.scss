@@ -1,0 +1,387 @@
+// BeamMP forum theme. Colours come from the BeamMP Light/Dark color schemes
+// (about.json), so everything here uses Discourse's CSS variables and works
+// in both modes. Mirrors the look of beammp.com: neutral greys, orange accent,
+// rounded corners, translucent blurred header.
+
+:root {
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --heading-font-family: var(--font-family);
+}
+
+body {
+  font-family: var(--font-family);
+}
+
+// Header ---------------------------------------------------------------
+.d-header {
+  background: rgba(var(--header_background-rgb), 0.8);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--primary-low);
+  box-shadow: none;
+
+  .d-header-icons .icon:hover,
+  .d-header-icons .icon:focus {
+    background: var(--primary-very-low);
+    border-radius: var(--beammp-radius);
+  }
+}
+
+// The BeamMP logo PNGs are square with built-in padding (as on beammp.com,
+// where they render at 4rem), so Discourse's default logo height is too small.
+.d-header .title #site-logo,
+.d-header .title .logo-big {
+  height: 3.5rem;
+  max-height: none;
+  width: auto;
+
+  @media (max-width: 767px) {
+    height: 2.75rem;
+  }
+}
+
+// Buttons --------------------------------------------------------------
+.btn {
+  border-radius: calc(var(--beammp-radius) - 2px);
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+
+// Primary buttons: Discourse drives these through variables (including hover),
+// so override the variables rather than the selectors.
+:root {
+  --d-button-primary-bg-color: var(--beammp-orange);
+  --d-button-primary-bg-color--hover: var(--beammp-orange-hover);
+  --d-button-primary-text-color: var(--beammp-on-orange);
+  --d-button-primary-text-color--hover: var(--beammp-on-orange);
+  --d-button-primary-icon-color: var(--beammp-on-orange);
+  --d-button-primary-icon-color--hover: var(--beammp-on-orange);
+}
+
+// Selected rows (admin settings nav, dropdown options, etc.). Discourse's
+// default is a light blue that is unreadable in dark mode.
+:root {
+  --d-selected: color-mix(in srgb, var(--beammp-orange) 22%, var(--secondary));
+  --d-selected-text-color: var(--primary);
+}
+
+// Header icons: Discourse's default (header_primary-low-mid) is ~1.6:1 on a
+// white header. Keep them secondary to the full-strength hover color, but legible.
+:root {
+  --d-header-icon-color: color-mix(in srgb, var(--header_primary) 70%, var(--header_background));
+}
+
+// Read (visited) topic titles. Discourse's default muted grey is only ~3.4:1
+// on white; this mix keeps a clear read/unread difference at ~5:1 in light mode.
+:root {
+  --title-color--read: color-mix(in srgb, var(--primary) 62%, var(--secondary));
+}
+
+.search-advanced .search-results .fps-result .topic a.search-link.visited .topic-title {
+  color: var(--title-color--read);
+}
+
+// Hover/focus surfaces. Discourse derives these from the palette and in dark mode
+// they come out near-white (e.g. a closed <details> or a flat button turned white
+// on hover). Use a subtle neutral tint that works in both modes.
+:root {
+  --d-hover: color-mix(in srgb, var(--primary) 8%, var(--secondary));
+  --d-selected-hover: color-mix(in srgb, var(--beammp-orange) 30%, var(--secondary));
+  --d-button-flat-bg-color--hover: var(--d-hover);
+  --d-button-flat-bg-color--focus: var(--d-hover);
+  --d-button-transparent-text-color--hover: var(--beammp-orange);
+  --d-button-transparent-icon-color--hover: var(--beammp-orange);
+  --d-input-focused-color: var(--beammp-orange);
+  --d-drag-indicator-color: var(--beammp-orange);
+}
+
+// Topic timeline: progress line and handle (Discourse exposes variables for these;
+// the fullscreen/mobile variant draws its line with a different variable).
+:root {
+  --topic-timeline-border-color: var(--beammp-orange);
+  --topic-timeline-handle-color: var(--beammp-orange);
+}
+
+.timeline-container.timeline-fullscreen .topic-timeline .timeline-scrollarea {
+  border-right-color: var(--beammp-orange);
+}
+
+// Collapsed "1 / 3" progress button shown at the bottom of a topic on mobile.
+// Text is plain (orange text on white would only be ~3:1); the fill is orange-tinted.
+#topic-progress-wrapper #topic-progress {
+  border-color: var(--primary-low);
+  color: var(--primary);
+
+  .nums {
+    color: var(--primary);
+  }
+
+  .bg {
+    background-color: color-mix(in srgb, var(--beammp-orange) 25%, var(--secondary));
+  }
+}
+
+// Matched search term in the "N results for ..." heading.
+// !important because Discourse nests this rule several levels deep.
+.result-count span.term {
+  background: color-mix(in srgb, var(--beammp-orange) 28%, var(--secondary)) !important;
+  border-radius: 4px;
+}
+
+// Top-of-page navigation progress bar.
+.loading-indicator-container .loading-indicator {
+  background-color: var(--beammp-orange);
+}
+
+// Cards, menus, modals -------------------------------------------------
+.d-modal__container,
+.fk-d-menu,
+.fk-d-tooltip,
+.user-card,
+.group-card,
+.topic-map,
+.d-toast {
+  border-radius: var(--beammp-radius);
+}
+
+.fk-d-menu,
+.d-modal__container,
+.user-card.show,
+.group-card.show {
+  border: 1px solid var(--primary-low);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+input[type="number"],
+textarea,
+select,
+.select-kit .select-kit-header {
+  border-radius: calc(var(--beammp-radius) - 2px);
+  border-color: var(--primary-low-mid);
+
+  &:focus {
+    border-color: var(--beammp-orange);
+    box-shadow: 0 0 0 1px var(--beammp-orange);
+    outline: none;
+  }
+}
+
+// The composer wraps its textarea in a container that draws its own focus ring.
+.d-editor-container {
+  border-radius: calc(var(--beammp-radius) - 2px);
+
+  &:focus-within,
+  &.in-focus {
+    border-color: var(--beammp-orange);
+    outline-color: var(--beammp-orange);
+  }
+}
+
+// Topic list -----------------------------------------------------------
+.topic-list {
+  .topic-list-header {
+    border-bottom: 2px solid var(--primary-low);
+  }
+
+  .topic-list-item {
+    border-bottom: 1px solid var(--primary-low);
+
+    &:hover {
+      background: var(--primary-very-low);
+    }
+  }
+}
+
+// Category badges and tags ---------------------------------------------
+.badge-category__wrapper,
+.discourse-tag.box {
+  border-radius: 999px;
+}
+
+// Unread / new indicators use the brand orange instead of the link blue.
+:root {
+  --d-sidebar-highlight-suffix-color: var(--beammp-orange);
+  --d-sidebar-active-suffix-color: var(--beammp-orange);
+}
+
+.sidebar-wrapper .sidebar-section-link .sidebar-section-link-suffix.icon.unread svg,
+.sidebar-wrapper .sidebar-section-link-wrapper .sidebar-section-link-suffix.icon.unread svg {
+  color: var(--beammp-orange);
+}
+
+.badge-notification.unread-notifications,
+.badge-notification.new-topic,
+.badge-notification.new-posts,
+.badge-notification.unread-posts,
+.badge-notification.new-pms,
+.badge-notification.unread-high-priority-notifications {
+  background: var(--beammp-orange);
+  color: var(--beammp-on-orange);
+}
+
+// New-user usernames are rendered in --primary-low-mid (~2:1 on white). That
+// variable also colours borders, so fix just the name.
+.topic-post .names span.new-user:not(.staff) a {
+  color: var(--primary-medium);
+}
+
+// Same fix for the user card / profile header name block.
+.names__primary.new-user,
+.user-card .card-content .names .names__primary.new-user a,
+.user-card .card-content .names .names__primary.new-user a span {
+  color: var(--primary-medium);
+}
+
+// Discourse's shared corner radius (4px by default) — cards, popups, menus.
+:root {
+  --d-border-radius: calc(var(--beammp-radius) - 2px);
+}
+
+// "last visit" divider label (Discourse default red is ~3.2:1 on white).
+.topic-post-visited-message {
+  color: var(--danger);
+}
+
+// Read-state dot next to post timestamps: orange when unread, neutral when read.
+.read-state {
+  color: var(--beammp-orange);
+
+  &.read {
+    color: var(--primary-low-mid);
+  }
+}
+
+// Minimized composer ("resume your draft") bar.
+#reply-control.draft {
+  background: var(--beammp-orange);
+  color: var(--beammp-on-orange);
+}
+
+// The dot inside the orange "new" badge.
+.badge-notification.new-topic::before {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+// Notifications / user menu: unread rows and counts use the orange tint.
+.user-menu {
+  // !important: Discourse nests these rules several levels deep.
+  .notification.unread,
+  li.unread {
+    background: color-mix(in srgb, var(--beammp-orange) 10%, var(--secondary)) !important;
+
+    .d-icon {
+      color: var(--beammp-orange);
+    }
+  }
+
+  .tabs-list .badge-notification {
+    background: var(--beammp-orange) !important;
+    color: var(--beammp-on-orange);
+  }
+}
+
+// Sidebar --------------------------------------------------------------
+.sidebar-wrapper {
+  border-right: 1px solid var(--primary-low);
+
+  .sidebar-section-link.active,
+  .sidebar-section-link:hover {
+    background: var(--primary-very-low);
+    border-radius: calc(var(--beammp-radius) - 2px);
+  }
+}
+
+// Posts ----------------------------------------------------------------
+// Shared by everything that renders cooked post content: the post itself, the
+// composer's live preview and the rich-text editor. Using a mixin (rather than
+// scoping to .topic-post) keeps quotes, mentions and code identical in all three.
+@mixin beammp-cooked-content {
+  a.mention,
+  a.mention-group {
+    border-radius: 999px;
+  }
+
+  blockquote {
+    border-left: 3px solid var(--beammp-orange);
+    border-radius: 0 calc(var(--beammp-radius) - 4px) calc(var(--beammp-radius) - 4px) 0;
+  }
+
+  // Quoted replies are an <aside> made of a header and a blockquote. Draw the
+  // bar, background and corners once on the aside so the two parts read as one
+  // card (Discourse gives each part its own border, which looks mismatched).
+  aside.quote {
+    border-left: 4px solid var(--beammp-orange);
+    border-radius: 0 calc(var(--beammp-radius) - 4px) calc(var(--beammp-radius) - 4px) 0;
+    background: var(--primary-very-low);
+    overflow: hidden;
+
+    > .title,
+    > blockquote {
+      background: transparent;
+      border-left: 0;
+      border-radius: 0;
+    }
+
+    > blockquote {
+      margin-bottom: 0;
+    }
+
+    // A quote inside a quote: step the surface so the levels stay distinct.
+    aside.quote {
+      background: var(--primary-low);
+    }
+  }
+
+  code,
+  pre {
+    border-radius: calc(var(--beammp-radius) - 4px);
+  }
+}
+
+.topic-post .topic-body .cooked {
+  @include beammp-cooked-content;
+}
+
+.d-editor-preview-wrapper .d-editor-preview,
+.ProseMirror {
+  @include beammp-cooked-content;
+}
+
+// Links keep the brand blue (tertiary) but get an orange hover.
+a:hover {
+  color: var(--beammp-orange);
+}
+
+// Inactive pills: subtle grey hover instead of Discourse's blue text + underline.
+.nav-pills > li a:not(.active),
+.nav-pills > li button:not(.active) {
+  border-radius: calc(var(--beammp-radius) - 4px);
+
+  &:hover,
+  &:focus-visible {
+    background: var(--primary-low);
+    color: var(--primary);
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.nav-pills > li a.active,
+.nav-pills > li button.active {
+  background: var(--beammp-orange);
+  color: var(--beammp-on-orange);
+
+  // Discourse draws a tertiary-coloured underline here; redundant on a filled pill.
+  &::after {
+    display: none;
+  }
+
+  .d-icon {
+    color: var(--beammp-on-orange);
+  }
+}

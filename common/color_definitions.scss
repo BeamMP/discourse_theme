@@ -1,0 +1,19 @@
+// BeamMP brand tokens, shared with beammp.com (Website/src/style.css).
+// Available as CSS variables in both the light and dark schemes.
+:root {
+  --beammp-orange: #f36d24;
+  --beammp-orange-hover: #dc5f1b;
+  // Text/icons on orange fills: black is ~7:1 on the brand orange (white is ~3:1).
+  --beammp-on-orange: #000;
+  --beammp-blue: #4470b6;
+  --beammp-green: #1d9749;
+  --beammp-radius: 0.625rem;
+
+  // Secondary/muted text (timestamps, labels, counts) uses --primary-medium, which
+  // Discourse derives at only ~3.4:1 on white. Defined here (not common.scss) so it
+  // is emitted with the palette variables and wins over the derived value.
+  --primary-medium: color-mix(in srgb, var(--primary) 62%, var(--secondary));
+  // Discourse precomputes these from the palette, so they need the same override.
+  --primary-med-or-secondary-med: var(--primary-medium);
+  --primary-med-or-secondary-high: var(--primary-medium);
+}

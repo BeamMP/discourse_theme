@@ -1,0 +1,35 @@
+{
+  "name": "BeamMP",
+  "about_url": "https://beammp.com",
+  "license_url": null,
+  "authors": "BeamMP Team",
+  "theme_version": "0.1.0",
+  "minimum_discourse_version": "3.3.0",
+  "assets": {},
+  "color_schemes": {
+    "BeamMP Light": {
+      "primary": "171717",
+      "secondary": "ffffff",
+      "tertiary": "4470b6",
+      "quaternary": "f36d24",
+      "header_background": "ffffff",
+      "header_primary": "171717",
+      "highlight": "fcd9c4",
+      "danger": "dc2626",
+      "success": "1d9749",
+      "love": "e5484d"
+    },
+    "BeamMP Dark": {
+      "primary": "fafafa",
+      "secondary": "171717",
+      "tertiary": "6b95d6",
+      "quaternary": "f36d24",
+      "header_background": "171717",
+      "header_primary": "fafafa",
+      "highlight": "5a2a10",
+      "danger": "ef4444",
+      "success": "22c55e",
+      "love": "f87171"
+    }
+  }
+}
