@@ -13,6 +13,25 @@ blurred header. Source of truth for the tokens is `Website/src/style.css`.
 - `javascripts/discourse/connectors/below-footer/beammp-footer.gjs`: the site footer
 - `locales/*.yml`: footer translations
 
+## Welcome banner (hero)
+
+On the homepage and categories page (desktop and tablet; Discourse hides the
+welcome banner on phones) the banner is restyled like the beammp.com landing hero:
+the landing image (`assets/landing.jpg`, the website's `landing-lq.jpg`) under a
+dark fade and a blue/orange tint, with a frosted search box and a stat row.
+
+The stat row (`connectors/welcome-banner-below-input/beammp-hero-stats.gjs`) shows:
+
+- **Players online** and **public servers** from `https://api.beammp.com/metrics`,
+  the same endpoint the website uses. That API answers CORS only for origins it
+  allows, so the forum's origin (it currently allows `https://forum.beammp.com`)
+  must be on its list. If it is not, or the API is down, these two are simply left
+  out. They cannot be tested from `localhost`.
+- **Members, topics and posts** from Discourse's own `/about.json`.
+
+Settings: `show_hero_stats`, `show_game_stats`, `game_stats_url`. Labels reuse the
+website's translations and Discourse's built-in strings.
+
 ## Footer
 
 A footer matching beammp.com (social icons, Patreon, copyright, About / Privacy /

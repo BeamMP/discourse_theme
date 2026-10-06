@@ -4,3 +4,6 @@ de:
     about: "Über uns"
     privacy_policy: "Datenschutzerklärung"
     terms_conditions: "AGB"
+  hero:
+    players_online: "Spieler online"
+    public_servers: "Öffentliche Server"

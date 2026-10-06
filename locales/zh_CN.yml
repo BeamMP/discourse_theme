@@ -4,3 +4,6 @@ zh_CN:
     about: "关于我们"
     privacy_policy: "隐私政策"
     terms_conditions: "条款与细则"
+  hero:
+    players_online: "在线玩家"
+    public_servers: "公开服务器"

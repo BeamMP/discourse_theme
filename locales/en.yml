@@ -5,3 +5,6 @@ en:
     privacy_policy: "Privacy Policy"
     terms_conditions: "Terms & Conditions"
     copyright: "© 2019 - %{year} | BeamMP Mod Team All Rights Reserved"
+  hero:
+    players_online: "Players Online"
+    public_servers: "Public Servers"

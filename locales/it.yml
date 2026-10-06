@@ -4,3 +4,6 @@ it:
     about: "Informazioni"
     privacy_policy: "Privacy"
     terms_conditions: "Termini e condizioni"
+  hero:
+    players_online: "Giocatori online"
+    public_servers: "Server pubblici"

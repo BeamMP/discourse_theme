@@ -3,9 +3,11 @@
   "about_url": "https://beammp.com",
   "license_url": null,
   "authors": "BeamMP Team",
-  "theme_version": "0.1.0",
+  "theme_version": "0.2.0",
   "minimum_discourse_version": "3.3.0",
-  "assets": {},
+  "assets": {
+    "beammp-landing": "assets/landing.jpg"
+  },
   "color_schemes": {
     "BeamMP Light": {
       "primary": "171717",

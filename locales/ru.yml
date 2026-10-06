@@ -4,3 +4,6 @@ ru:
     about: "О проекте"
     privacy_policy: "Политика конфиденциальности"
     terms_conditions: "Условия использования"
+  hero:
+    players_online: "Игроки онлайн"
+    public_servers: "Публичные серверы"

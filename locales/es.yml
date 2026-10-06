@@ -4,3 +4,6 @@ es:
     about: "Acerca de"
     privacy_policy: "Política de privacidad"
     terms_conditions: "Términos y condiciones"
+  hero:
+    players_online: "Jugadores en línea"
+    public_servers: "Servidores públicos"

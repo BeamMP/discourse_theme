@@ -505,3 +505,279 @@ a:hover {
     }
   }
 }
+
+// ===========================================================================
+// Visual polish, borrowed from the other BeamMP surfaces (Website, Accounts,
+// Staff-Portal). Everything below is decoration; none of it changes behaviour.
+// ===========================================================================
+
+// Background glow -------------------------------------------------------
+// Two faint radial washes (blue top-left, orange top-right), as on the
+// Staff-Portal, so pages have some depth instead of a flat fill.
+body {
+  background-image:
+    radial-gradient(
+      60rem 40rem at 8% -8%,
+      color-mix(in srgb, var(--beammp-blue) 14%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      55rem 38rem at 100% -12%,
+      color-mix(in srgb, var(--beammp-orange) 12%, transparent),
+      transparent 70%
+    );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+// Primary button glow ---------------------------------------------------
+// Glow ring on hover and a slight press-in on click (website and Accounts).
+.btn-primary {
+  transition:
+    box-shadow 0.18s ease,
+    transform 0.12s ease,
+    background-color 0.15s ease;
+
+  &:hover:not(:disabled):not(.disabled) {
+    box-shadow:
+      0 0 0 3px color-mix(in srgb, var(--beammp-orange) 24%, transparent),
+      0 8px 20px color-mix(in srgb, var(--beammp-orange) 32%, transparent);
+  }
+
+  &:active:not(:disabled):not(.disabled) {
+    transform: scale(0.985);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+// Page-load progress bar ------------------------------------------------
+// Blue-to-orange with a soft glow (Staff-Portal's route progress bar).
+.loading-indicator-container .loading-indicator {
+  background: linear-gradient(90deg, var(--beammp-blue), var(--beammp-orange));
+  box-shadow: 0 0 10px color-mix(in srgb, var(--beammp-orange) 55%, transparent);
+}
+
+// Card and row hover ----------------------------------------------------
+.category-boxes .category-box,
+.category-boxes-with-topics .category-box {
+  border-radius: var(--beammp-radius);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+  }
+}
+
+.category-list .category:hover {
+  background: var(--primary-very-low);
+}
+
+// An orange edge on the hovered topic row, like the website's accented cards.
+.topic-list .topic-list-item {
+  transition: background-color 0.12s ease;
+
+  &:hover {
+    box-shadow: inset 3px 0 0 var(--beammp-orange);
+  }
+}
+
+// Pill badges -----------------------------------------------------------
+// User titles and badge labels as small uppercase pills (Accounts/Staff-Portal).
+.topic-post .names .user-title,
+.user-card .user-title,
+.badge-wrapper.box,
+.badge-wrapper.bullet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.1rem 0.55rem;
+  border: 1px solid var(--primary-low);
+  border-radius: 999px;
+  background: var(--primary-very-low);
+  color: var(--primary-medium);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+// Badge cards (the /badges page) get the same hover lift as the category cards.
+.badge-card {
+  border-radius: var(--beammp-radius);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+  }
+}
+
+// Motion ----------------------------------------------------------------
+@keyframes beammp-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// Only list rows and cards (not the post stream, which re-renders as you scroll).
+@media (prefers-reduced-motion: no-preference) {
+  .topic-list .topic-list-item,
+  .category-box,
+  .category-list .category,
+  .badge-card,
+  .welcome-banner {
+    animation: beammp-fade-up 0.28s ease both;
+  }
+}
+
+// Welcome banner / hero -------------------------------------------------
+// The website's landing hero: image, dark vertical fade, blue/orange tint, centred
+// headline. The stat row comes from connectors/welcome-banner-below-input.
+.welcome-banner {
+  position: relative;
+  overflow: hidden;
+  margin: 1rem 0 1.5rem;
+  border-radius: calc(var(--beammp-radius) + 6px);
+  color: #fff;
+  background-color: #101828;
+  background-image:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--beammp-blue) 30%, transparent),
+      color-mix(in srgb, var(--beammp-orange) 24%, transparent)
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.8)),
+    url($beammp-landing);
+  background-size: cover;
+  background-position: center;
+
+  &__wrap {
+    padding: clamp(1.75rem, 5vw, 3.25rem) 1.25rem;
+  }
+
+  &__title {
+    color: #fff;
+    font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
+  }
+
+  &__subheader {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  // Frosted search box (the website's secondary hero button).
+  .search-input--welcome-banner,
+  .search-menu .search-input {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    border-radius: var(--beammp-radius);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+
+    input {
+      background: transparent;
+      color: #fff;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.72);
+      }
+    }
+
+    .d-icon {
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+}
+
+.beammp-hero-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.25rem 2.75rem;
+  margin-top: 1.5rem;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__value {
+    color: var(--beammp-orange);
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.1;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+  }
+
+  &__label {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+}
+
+// 404 page --------------------------------------------------------------
+.page-not-found {
+  h1.title {
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--beammp-blue), var(--beammp-orange));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  &-search {
+    background: var(--primary-very-low);
+    border: 1px solid var(--primary-low);
+    border-radius: calc(var(--beammp-radius) + 4px);
+  }
+}
+
+// Pulsing "live" dot beside the game stats in the hero.
+.beammp-hero-stats__live {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.4rem;
+  border-radius: 50%;
+  background: var(--beammp-green);
+  vertical-align: middle;
+}
+
+@keyframes beammp-live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--beammp-green) 60%, transparent);
+  }
+
+  70% {
+    box-shadow: 0 0 0 7px transparent;
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .beammp-hero-stats__live {
+    animation: beammp-live-pulse 2s ease-out infinite;
+  }
+}
