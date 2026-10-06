@@ -1,0 +1,4 @@
+show_footer:
+  type: bool
+  default: true
+  description: "Show the BeamMP footer (social links, Patreon, About / Privacy / Terms) at the bottom of every page, matching beammp.com."

@@ -9,6 +9,20 @@ blurred header. Source of truth for the tokens is `Website/src/style.css`.
 - `about.json`: theme metadata and the two colour schemes (BeamMP Light, BeamMP Dark)
 - `common/color_definitions.scss`: brand CSS variables
 - `common/common.scss`: component styling
+- `settings.yml`: theme settings (`show_footer`)
+- `javascripts/discourse/connectors/below-footer/beammp-footer.gjs`: the site footer
+- `locales/*.yml`: footer translations
+
+## Footer
+
+A footer matching beammp.com (social icons, Patreon, copyright, About / Privacy /
+Terms) is rendered through Discourse's `below-footer` outlet. It can be switched
+off in Admin > Themes > BeamMP > Settings > `show_footer`.
+
+The text is translated with Discourse theme translations. `en`, `de`, `es`, `fr`,
+`it`, `ru` and `zh_CN` are copied from `Website/src/locales/*.json`
+(`message.footer.*`; the website's `zh` is Discourse's `zh_CN`). The copyright line is
+English only, as on the website. To add a language, add `locales/<code>.yml`.
 
 ## Using it
 

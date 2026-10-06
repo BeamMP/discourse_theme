@@ -294,6 +294,20 @@ select,
   }
 }
 
+// The admin sidebar panel is a different (raised) surface from the normal sidebar,
+// but the footer strip and the scroll-fade above it are drawn in the page colour,
+// which leaves a dark band at the bottom of the panel. Match them to the panel.
+.admin-area .sidebar-wrapper {
+  // Also fills the few pixels to the right of the panel (it is 2px narrower than
+  // its wrapper), which otherwise show as a stripe in the page colour.
+  background: var(--token-color-surface-hovered);
+
+  .sidebar-footer-wrapper {
+    background: var(--token-color-surface-hovered);
+    --d-sidebar-footer-fade: var(--token-color-surface-hovered);
+  }
+}
+
 // Posts ----------------------------------------------------------------
 // Shared by everything that renders cooked post content: the post itself, the
 // composer's live preview and the rich-text editor. Using a mixin (rather than
@@ -383,5 +397,111 @@ a:hover {
 
   .d-icon {
     color: var(--beammp-on-orange);
+  }
+}
+
+// Footer ---------------------------------------------------------------
+// Matches the layout of the footer on beammp.com (stacked and centred on mobile,
+// icons left / legal right from 768px). Markup lives in
+// javascripts/discourse/connectors/below-footer/beammp-footer.gjs.
+.beammp-footer {
+  border-top: 1px solid var(--primary-low);
+  padding: 2rem 1rem;
+  margin-top: 2rem;
+  background: var(--secondary);
+
+  &__inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+  }
+
+  &__social {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    a {
+      color: var(--primary-medium);
+      display: inline-flex;
+      transition: color 0.15s;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--tertiary);
+      }
+    }
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  &__divider {
+    display: none;
+    color: var(--primary-low-mid);
+
+    @media (min-width: 768px) {
+      display: inline;
+    }
+  }
+
+  // Patreon link: orange text, nudged toward the page text colour so it stays
+  // readable on both the light and dark palettes.
+  &__social a.beammp-footer__patreon {
+    font-size: 0.75rem;
+    color: color-mix(in srgb, var(--beammp-orange) 70%, var(--primary));
+    text-underline-offset: 2px;
+
+    &:hover,
+    &:focus-visible {
+      color: color-mix(in srgb, var(--beammp-orange) 70%, var(--primary));
+      text-decoration: underline;
+    }
+  }
+
+  &__legal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--primary-medium);
+    text-align: center;
+
+    @media (min-width: 768px) {
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__links {
+    display: flex;
+    gap: 0.75rem;
+
+    a {
+      color: var(--primary-medium);
+      transition: color 0.15s;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--tertiary);
+      }
+    }
   }
 }
