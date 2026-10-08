@@ -94,6 +94,22 @@ export default class BeamMPFooter extends Component {
                 /></svg>
             </a>
             <a
+              href="https://www.twitch.tv/beammpofficial"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitch"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              ><path d="M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9V7m5 4V7" /></svg>
+            </a>
+            <a
               href="https://www.instagram.com/beammpofficial"
               target="_blank"
               rel="noopener noreferrer"
